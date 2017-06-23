@@ -1,0 +1,1 @@
+# EmbeddedSolrServer-Unit-Test-Framework
