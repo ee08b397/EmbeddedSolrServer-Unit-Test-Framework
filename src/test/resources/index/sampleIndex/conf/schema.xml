@@ -1,0 +1,58 @@
+<schema name="template" version="1.5">
+
+    <fields>
+        <!-- the "id" field is an ASL requirement -->
+        <field name="id" type="string" indexed="true" stored="true" required="true" />
+
+        <!-- catchall field containing all searchable text -->
+        <field name="text" type="text_general" indexed="true" stored="false" multiValued="true" />
+
+        <!-- used internally by solr to perform partial updates and maintin a transaction log -->
+        <field name="_version_" type="long" indexed="true" stored="true" />
+
+        <!-- Standard columns -->
+        <field name="Symbol" type="string" indexed="true" stored="true" required="true" />
+        <field name="StockExchange" type="string" indexed="true" stored="true" required="true" />
+        <field name="Created" type="string" indexed="true" stored="true" />
+
+        <field name="Name" type="text_general" indexed="true" stored="true" />
+        <field name="DaysRange" type="string" indexed="true" stored="true" />
+        <field name="Change" type="string" indexed="true" stored="true" />
+        <field name="MarketCapitalization" type="string" indexed="true" stored="true" />
+
+        <field name="AverageDailyVolume" type="double" indexed="true" stored="true" />
+        <field name="DaysLow" type="double" indexed="true" stored="true" />
+        <field name="DaysHigh" type="double" indexed="true" stored="true" />
+        <field name="YearLow" type="double" indexed="true" stored="true" />
+        <field name="YearHigh" type="double" indexed="true" stored="true" />
+        <field name="LastTradePriceOnly" type="double" indexed="true" stored="true" />
+        <field name="Volume" type="double" indexed="true" stored="true" />
+    </fields>
+
+    <!-- NOTE - the type of the uniqueKey field should be a String or numeric type. Problems can arise when the uniqueKey is a tokenized text field -->
+    <uniqueKey>id</uniqueKey>
+
+    <copyField source="*" dest="text" />
+
+    <types>
+        <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+        <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" />
+        <fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0" />
+        <fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0" />
+        <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0" />
+        <fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" positionIncrementGap="0" />
+        <fieldType name="date" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0" />
+        <fieldtype name="binary" class="solr.BinaryField" />
+        <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+            <analyzer type="index">
+                <tokenizer class="solr.StandardTokenizerFactory" />
+                <filter class="solr.LowerCaseFilterFactory" />
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="solr.StandardTokenizerFactory" />
+                <filter class="solr.LowerCaseFilterFactory" />
+            </analyzer>
+        </fieldType>
+    </types>
+
+</schema>
