@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Suppress Solr core logging to reduce I/O cost -->
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="org.apache.solr" level="ERROR"/>
+    <logger name="o.a.s.u.plugin" level="ERROR"/>
+    <logger name="o.a.solr" level="ERROR"/>
+    <logger name="o.a.s.h" level="ERROR"/>
+    <logger name="o.a.s.h.c" level="ERROR"/>
+</configuration>

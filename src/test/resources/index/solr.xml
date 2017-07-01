@@ -1,0 +1,12 @@
+<solr persistent="false">
+
+    <!--
+    adminPath: RequestHandler path to manage cores.
+    If 'null' (or absent), cores will not be manageable via request handler
+    -->
+    <cores adminPath="/admin/cores">
+        <core name="sampleIndex" instanceDir="sampleIndex" dataDir="sampleIndex/data" />
+        <!-- add more cores here -->
+    </cores>
+
+</solr>
